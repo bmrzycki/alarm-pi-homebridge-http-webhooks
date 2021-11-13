@@ -71,7 +71,7 @@ def info(msg):
 def whook(args):
     url, query = f"http://{WEBHOOKS['host']}:{WEBHOOKS['port']}/", []
     for k in args:
-        query.append(f"{quote(k)}={quote(args[k])}")
+        query.append(f"{quote(k, safe='')}={quote(str(args[k]), safe='')}")
     if query:
         url += '?' + '&'.join(query)
     try:
