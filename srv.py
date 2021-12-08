@@ -92,7 +92,7 @@ def trigger():
     if not ok:
         return
     try:
-        state = int(data['currentState'])
+        state_num = int(data['currentState'])
     except Exception as e:
         error(f"currentState {str(e)} from data={data}")
         return
@@ -100,7 +100,7 @@ def trigger():
               1 : 'away',
               2 : 'night',
               3 : 'off',
-              4 : 'triggered' }.get(state, 'unknown')
+              4 : 'triggered' }.get(state_num, 'unknown')
     if state in ('off', 'triggered', 'unknown'):
         if state == 'unknown':
             error(f"invalid security response data={data}")
