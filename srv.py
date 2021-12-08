@@ -57,7 +57,7 @@ SECURITY = {
 WEBHOOKS = {
     'host'  : '127.0.0.1',
     'port'  : 51828,
-    'delay' : 0.2,
+    'delay' : 0.4,
 }
 
 def error(msg):
