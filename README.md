@@ -5,8 +5,7 @@ API. This server uses the GPIO pins on a
 [Raspberry Pi](https://www.raspberrypi.org/ "Raspberry Pi") to read home alarm
 zone information directly from passive sensors like
 [magnetic switches](https://en.wikipedia.org/wiki/Reed_switch "magnetic switches").
-By doing so you can build an inexpensive home monitoring system integrated
-into HomeKit.
+By doing so you can build an inexpensive home monitoring system.
 
 # Installation
 Copy `srv.py` and `default.cfg` anywhere you'd like. It can also be run
@@ -35,26 +34,27 @@ sensors, which act as simple switches, you want to wire into the GPIO pins.
 Devices like motion detectors require more complicated wiring setups and are
 not supported.
 
-First, identify the sensor (or sensor groups) known as zones you wish to
-monitor with the Pi's GPIO pins. If they are connected to a home security
-system it's best if you disconnect them first.
+First, identify the sensor(s) in a zone you wish to monitor. If they are
+connected to an existing home security system you'll need to disconnect them
+first.
 
 Next, select [Pi GPIO pins](https://pinout.xyz/ "Pi GPIO pins") for each
 of your zones. It's best to use GPIO pins that don't have a special use:
 5, 6, 16, 17, 22, 23, 24, 25, 26, 27.
 
-Physical wiring is fairly straightforward:
+Per-zone physical wiring is straightforward:
 ```
-Pi +3v3 Power (pin 1 or 17)
+Pi +3v3 Power (pin 1 or 17, shared across all zones)
   o---------+-----------+
             |           |
             |            \
-     +-->|--+             \  Switch
+     +-->|--+             \  Switch(es) in the zone
      |  1N4001 diode    o
      |                  |
   o--+------------------+
-GPIO N input
+GPIO pin input (one per zone)
 ```
-While not required it's a good idea to add the diode to dissapate inductive
-load when the switch changes state as a
-[flyback diode](https://en.wikipedia.org/wiki/Flyback_diode "flyback diode").
+Though not necessary, the 1N4001 diode in the above schematic operates
+as a [flyback diode](https://en.wikipedia.org/wiki/Flyback_diode) and
+protects your Pi from inductive current generated when switches change
+state.
