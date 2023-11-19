@@ -12,11 +12,11 @@ Copy `srv.py` and `default.cfg` anywhere you'd like. It can also be run
 directly from the Git repo. By default `srv.py` reads `default.cfg` for its
 configuration information but you can use the `-c` parameter to use a custom
 configuration file. The program is Python 3 and requires the
-[RPi.GPIO](https://pypi.org/project/RPi.GPIO/ "RPi.GPIO") module. If you're
+[GPIO Zero](https://github.com/gpiozero/gpiozero "GPIO Zero") module. If you're
 using [Raspbian Linux](https://www.raspbian.org/ "Raspbian Linux") it's
 installed by default. The user running `srv.py` needs to also have permissions
 to setup and read the Pi GPIO pins. On Raspbian the user needs to be a member
-of the `gpio` group (the default user `pi` is already a member).
+of the `gpio` group (the default user is already a member).
 
 # Software setup
 The `default.cfg` file contains all available parameters and documentation
