@@ -61,8 +61,8 @@ class Zone:
         is_active, state = self.button.is_active, "false"
         if is_active:
             state = "true"
-        ok, _ = WEBHOOK.send({"accessoryId": self.name, "state": state})
-        if not ok:
+        good, _ = WEBHOOK.send({"accessoryId": self.name, "state": state})
+        if not good:
             error(f"failed to update {self}")
             return
         if self.security_name and not is_active:
@@ -72,8 +72,8 @@ class Zone:
         """
         Triggers an alarm event.
         """
-        ok, data = WEBHOOK({"accessoryId": self.security_name})
-        if not ok:
+        good, data = WEBHOOK.send({"accessoryId": self.security_name})
+        if not good:
             error(f"bad check of security name '{self.security_name}'")
             return
         try:
@@ -90,8 +90,10 @@ class Zone:
                 error(f"invalid security response data={data}")
             return
         # Send currentstate == 4 -> Triggered. Note the name case changed!
-        ok, data = WEBHOOK({"accessoryId": self.security_name, "currentstate": 4})
-        if ok:
+        good, data = WEBHOOK.send(
+            {"accessoryId": self.security_name, "currentstate": 4}
+        )
+        if good:
             info(f"alarm triggered by {self}")
 
 
